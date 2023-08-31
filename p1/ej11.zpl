@@ -2,7 +2,7 @@ set I := {1..8};
 set J := {1..8};
 set K := {1..9};
 
-var X[I*J] binary;
+var X[I*J] binary;    #Se coloca un alfil en la casilla (i,j)
 
 maximize alfiles: sum <i,j> in I*J: X[i,j];
 
