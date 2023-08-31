@@ -9,7 +9,7 @@ param U[I*J] := | 2, 3, 4, 5|
 			| 3 | -1, -1, 10, 19|
 			| 4 | -1, -1, -1, 12|;
 
-var X[<i,j> in I*J with i < j];		# Se alquila desde el inicio del año y hasta el inicio del año j
+var X[<i,j> in I*J with i < j] binary;		# Se alquila desde el inicio del año y hasta el inicio del año j
 
 maximize ganancia: sum <i,j> in I*J with i < j: X[i,j]*U[i,j];
 
