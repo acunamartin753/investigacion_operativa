@@ -13,6 +13,6 @@ subto r2: forall <i> in I do p[i] == 3*(sum <j> in I with j!=i : (x[i,j]+(2-x[i,
 subto r3: forall <i,j> in I*I do x[i,j]+x[j,i] <= 2;
 subto r4: forall <i> in I with i!=1 do p[1]-p[i] <= M*(1-y[i]);
 subto r5: forall <i> in I with i!=1 do p[i]-p[1] <= M*y[i]-1;
-subto ganaArgEcu: x[1,2] >=1;
-subto empataArgEcu: x[1,2] + x[2,1] <=1;
-subto pierdeArgEcu: x[1,2] <=1;
+#subto ganaArgEcu: x[1,2] >=1;
+#subto empataArgEcu: x[1,2] + x[2,1] <=1;
+#subto pierdeArgEcu: x[1,2] <=1;
