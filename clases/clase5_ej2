@@ -1,0 +1,10 @@
+set I := {1..3};
+
+param c[I*I] := read "viajes.txt" as "<1n, 2n> 4n" skip 1;
+param d[I*I] := read "viajes.txt" as "<1n, 2n> 3n" skip 1;
+
+var x[I*I] binary;
+
+minimize cost: sum <i,j> in I*I: x[i,j]*c[i,j];
+
+subto r1: (sum <i,j> in I*I: x[i,j]*d[i,j]) >= 4000;

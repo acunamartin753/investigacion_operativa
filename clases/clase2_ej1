@@ -1,0 +1,11 @@
+set I := {1,2};
+
+var X[I] real;
+
+maximize f : 5 * X[1] + 4 * X[2];
+
+subto r1 : 6 * X[1] + 4 * X[2] <= 24;
+subto r2 : X[1] + 2 * X[2] <= 6;
+subto r3 : X[1] <= 2;
+subto r4 : X[2] <= X[1] + 1;
+subto r5 : forall <i> in I do X[i] >= 0;

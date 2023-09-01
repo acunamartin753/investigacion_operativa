@@ -1,0 +1,28 @@
+# Set
+set M:= {1..4} ;
+
+# Variables
+var x[M] integer;
+var w real;
+
+# Parametros
+param costos[M] := <1> 35, <2> 29, <3> 22, <4> 27 ;
+param maxAnuncios[M] := <1> 20, <2> 15, <3> 25, <4> 15 ;
+param proy1[M] := <1> 50, <2> 31, <3> 20, <4> 35 ;
+param proy2[M] := <1> 30, <2> 35, <3> 15, <4> 42 ;
+param proy3[M] := <1> 60, <2> 25, <3> 20, <4> 25 ;
+
+# Empieza el modelo
+maximize ganancia : w ;
+
+# Restricciones:
+subto presupuesto: sum <m> in M: costos[m]*x[m] <= 850 ;
+subto maximosAnuncios: forall <m> in M: x[m] - maxAnuncios[m] <= 0 ;
+subto def1w: w <= sum <m> in M: proy1[m]*x[m] ;
+subto def2w: w <= sum <m> in M: proy2[m]*x[m] ;
+subto def3w: w <= sum <m> in M: proy3[m]*x[m] ;
+subto dif1: x[1]+x[2]-x[3]-x[4] <= 10 ;
+subto dif2: x[1]+x[2]-x[3]-x[4] >= -10 ;
+subto porlomenosunTV: x[1] >= 1 ;
+subto porcentaje3: x[3] >= 0.05 * sum<m> in M: x[m] ;
+subto noNegativas: forall <m> in M: x[m] >= 0 ;

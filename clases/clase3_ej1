@@ -1,0 +1,14 @@
+# Variables
+var I real; # Cantidad producida de la pintura I
+var E real; # Cantidad producida de la pintura E
+
+# Empieza el modelo
+maximize ganancia : 5*I+4*E ;
+
+# Restricciones:
+subto cantidadM1Disponible: 6*I+4*E <= 24 ;
+subto cantidadM2Disponible: I+2*E <= 24 ;
+subto demandaMaximaI: I <= 2 ;
+subto demandaMaximaE: E <= I+1 ;
+subto noNegativoI: I >= 0 ;
+subto noNegativoE: E >= 0 ;
