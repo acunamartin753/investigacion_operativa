@@ -13,6 +13,8 @@ var Y[I*Kodd] binary; #which take a value of 1 if team i has an H-A sequence in 
 var W[I*Kodd] binary; #which take a value of 1if team i has an away break in the double round starting in round kand zero otherwise.
 
 
+
+
 # Restricciones
 subto r1 : forall <i,j> in I*I with i != j do sum <k> in K with k <= n-1: (X[i,j,k]+X[j,i,k]) == 1;
 subto r2 : forall <i,j> in I*I with i != j do sum <k> in K with k > n-1: (X[i,j,k]+X[j,i,k]) == 1;
@@ -45,16 +47,18 @@ subto r12 : forall <i,k> in I*Kodd do sum <j> in I with j != i : X[j,i,k+1] >= W
 
 #subto BTB : forall <i,j,k> in I*I*Kodd with i != j do X[i,j,k]==X[j,i,k+1];
 
-subto min_max_a : forall <i,j,k> in I*I*K with i != j and k <= 18-c do sum <k2> in K with k <= k2 and k2 <= k+c : (X[i,j,k2]+X[j,i,k2]) <= 1;
+subto min_max_1 : forall <i,j,k> in I*I*K with i != j and k <= 18-c do sum <k2> in K with k <= k2 and k2 <= k+c : (X[i,j,k2]+X[j,i,k2]) <= 1;
 
 # Asi aparecía formulado en el paper
-#subto min_max_b : forall <i,j,k> in I*I*K with i != j do sum <k2> in K with ((k-d) <= k2 and 1 <= k2) and (k2 <= (k+d) or k2 <= (2*(n-1))) and k2 != k : X[i,j,k2] >= X[j,i,k];
+#subto min_max_2 : forall <i,j,k> in I*I*K with i != j do sum <k2> in K with ((k-d) <= k2 and 1 <= k2) and (k2 <= (k+d) or k2 <= (2*(n-1))) and k2 != k : X[i,j,k2] >= X[j,i,k];
+
+# El posta
+subto min_max_2 : forall <i,j,k> in I*I*K with i != j do X[j,i,k] <= (sum <k2> in K with (k-d) <= k2 and k2 <= (k+d) and k2 != k : X[i,j,k2]);
 
 # Asi aparecía formulado en la presentación
-subto min_max_b : forall <i,j,k> in I*I*K with i != j and d <= k and k <= 18-d do sum <k2> in K with (k-d) <= k2 and k2 <= (k+d) and k2 != k : X[i,j,k2] >= X[j,i,k];
+#subto min_max_2 : forall <i,j,k> in I*I*K with i != j and d <= k and k <= 18-d do sum <k2> in K with (k-d) <= k2 and k2 <= (k+d) and k2 != k : X[i,j,k2] >= X[j,i,k];
 
-# Funcion objetivo
-minimize z: sum <i,k> in I*Kodd : W[i,k];
+
 
 
 
