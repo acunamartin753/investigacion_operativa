@@ -29,21 +29,21 @@ subto r11: forall <i,k> in I*Kodd do W[i,k] <= (sum <j> in I with i != j : X[j,i
 subto r12: forall <i,k> in I*Kodd do W[i,k] <= (sum <j> in I with i != j : X[j,i,k+1]);
 
 # Simetrias
-#subto espejada : forall <i,j,k> in I*I*K with i != j and k < (n-1) do X[i,j,k]==X[j,i,k+n-1];
+#subto espejada : forall <i,j,k> in I*I*{1..(n-1)} with i != j do X[i,j,k]==X[j,i,k+n-1];
 
-#subto Francesa_a : forall <i,j,k> in I*I*K with i != j and 2 <= k and k <= (n-1) do X[i,j,1]==X[j,i,2*n-2];
+#subto Francesa_a : forall <i,j,k> in I*I*{2..(n-1)} with i != j do X[i,j,1]==X[j,i,2*n-2];
 
-#subto Francesa_b : forall <i,j,k> in I*I*K with i != j and 2 <= k and k <= n-1 do X[i,j,k]==X[j,i,k+n-2];
+#subto Francesa_b : forall <i,j,k> in I*I*{2..(n-1)} with i != j do X[i,j,k]==X[j,i,k+n-2];
 
-#subto Inglesa_1 : forall <i,j,k> in I*I*K with i != j and 2 <= k and k <= n-2 do X[i,j,n-1]==X[j,i,n];
+#subto Inglesa_a : forall <i,j,k> in I*I*{2..(n-2)} with i != j do X[i,j,n-1]==X[j,i,n];
 
-#subto Inglesa_2 : forall <i,j,k> in I*I*K with i != j and 2 <= k and k <= n-2 do X[i,j,k]==X[j,i,k+n];
+#subto Inglesa_b : forall <i,j,k> in I*I*{2..(n-2)} with i != j do X[i,j,k]==X[j,i,k+n];
 
-#subto invertida : forall <i,j,k> in I*I*K with i != j and 1 <= k and k <= n-1 do X[i,j,k]==X[j,i,2*n-1-k];
+#subto invertida : forall <i,j,k> in I*I*{1..(n-1)} with i != j do X[i,j,k]==X[j,i,2*n-1-k];
 
 #subto BTB : forall <i,j,k> in I*I*Kodd with i != j do X[i,j,k]==X[j,i,k+1];
 
-subto min_max_a: forall <i,j,k> in I*I*{1..18-c} with i!=j do (sum <k2> in K with k<=k2 and k2<= k+c and i !=j : (X[i,j,k2]+ X[j,i,k2])) <= 1;
+subto min_max_a: forall <i,j,k> in I*I*{1..(m-c)} with i!=j do (sum <k2> in K with k<=k2 and k2<= k+c and i !=j : (X[i,j,k2]+ X[j,i,k2])) <= 1;
 
 subto min_max_b: forall <i,j,k> in I*I*K with i!=j do (sum <k2> in K with k-d <= k2 and k2 <= k+d and k!= k2 : X[i,j,k2]) >= X[j,i,k];
 
