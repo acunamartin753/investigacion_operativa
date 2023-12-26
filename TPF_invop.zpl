@@ -3,9 +3,9 @@ param m := 18;
 param c:=5; 
 param d:=13;
 
-set I := {1..10};
+set I := {1..n};
 set Is := {1,2};
-set K := {1..18};
+set K := {1..m};
 set Kodd := {1,3,5,7,9,11,13,15,17};
 
 var X[I*I*K] binary;
@@ -18,7 +18,7 @@ subto r1: forall <i,j> in I*I with i != j do sum <k> in K with k<=(n-1) : (X[i,j
 subto r2: forall <i,j> in I*I with i != j do sum <k> in K with k > (n-1) : (X[i,j,k] + X[j,i,k]) == 1;
 subto r3: forall <i,j> in I*I with i != j do sum <k> in K : (X[i,j,k]) == 1 ;
 subto r4: forall <j,k> in I*K do sum <i> in I with i != j : (X[i,j,k] + X[j,i,k]) == 1;
-subto r5: forall <i,k> in (I without Is)*{1..m-1} do (sum <j> in Is : (X[i,j,k] + X[j,i,k] + X[i,j,k+1] + X[j,i,k+1])) <= 1;
+#subto r5: forall <i,k> in (I without Is)*{1..m-1} do (sum <j> in Is : (X[i,j,k] + X[j,i,k] + X[i,j,k+1] + X[j,i,k+1])) <= 1;
 subto r6_a: forall <i> in I do sum <k> in Kodd : Y[i,k] >= n/2-1;
 subto r6_b: forall <i> in I do sum <k> in Kodd : Y[i,k] <= n/2;
 subto r7: forall <i,k> in I*Kodd do (sum <j> in I with i != j : (X[i,j,k] + X[i,j,k+1])) <= 1+Y[i,k]; 
